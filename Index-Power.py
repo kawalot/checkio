@@ -1,4 +1,5 @@
 
+#What is the power hidden within indexes?
 def index_power(array, n):
     try:
         return array[n]**n
