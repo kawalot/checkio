@@ -5,6 +5,8 @@
 
 def checkio(digit):
     roman = ''
+    zero = ''
+    interim = []
     dictionary = {
         1: "I", 2: "II", 3: "III",
         4: "IV", 5: "V", 6: "VI",
@@ -19,70 +21,17 @@ def checkio(digit):
         4000: "MMMM"
     }
     string = str(digit)
-    if len(string) == 1:
-        roman = (dictionary.get(int(string[-1]), "Nothing"))
-        return roman
-    elif len(string) == 2:
-        if string[-1] == '0':
-            roman = (dictionary.get(int(string[-2] + '0'), "Nothing"))
+    correction = len(string) + 1
+    for i in range(len(string), 0, -1):
+        if string[i-correction] == '0':
+            zero = zero + '0'
+            continue
         else:
-            roman = (dictionary.get(int(string[-2] + '0'), "Nothing"))
-            roman += (dictionary.get(int(string[-1]), "Nothing"))
-        return roman
-    elif len(string) == 3:
-        if string[-1] == '0' and string[-2] == '0':
-            roman = (dictionary.get(int(string[-3] + '00'), "Nothing"))
-            return roman
-        elif string[-1] == '0' and string[-2] != '0':
-            roman = (dictionary.get(int(string[-3] + '00'), "Nothing"))
-            roman += (dictionary.get(int(string[-2] + '0'), "Nothing"))
-            return roman
-        elif string[-1] != '0' and string[-2] == '0':
-            roman = (dictionary.get(int(string[-3] + '00'), "Nothing"))
-            roman += (dictionary.get(int(string[-1]), "Nothing"))
-            return roman
-        else:
-            roman = (dictionary.get(int(string[-3] + '00'), "Nothing"))
-            roman += (dictionary.get(int(string[-2] + '0'), "Nothing"))
-            roman += (dictionary.get(int(string[-1]), "Nothing"))
-            return roman
-    elif len(string) == 4:
-        if string[-1] == '0' and string[-2] == '0' and string[-3] == '0':
-            roman = (dictionary.get(int(string[-4] + '000'), "Nothing"))
-            return roman
-        elif string[-1] == '0' and string[-2] == '0' and string[-3] != '0':
-            roman = (dictionary.get(int(string[-4] + '000'), "Nothing"))
-            roman += (dictionary.get(int(string[-3] + '00'), "Nothing"))
-            return roman
-        elif string[-1] == '0' and string[-2] != '0' and string[-3] != '0':
-            roman = (dictionary.get(int(string[-4] + '000'), "Nothing"))
-            roman += (dictionary.get(int(string[-3] + '00'), "Nothing"))
-            roman += (dictionary.get(int(string[-2] + '0'), "Nothing"))
-            return roman
-        elif string[-1] != '0' and string[-2] != '0' and string[-3] != '0':
-            roman = (dictionary.get(int(string[-4] + '000'), "Nothing"))
-            roman += (dictionary.get(int(string[-3] + '00'), "Nothing"))
-            roman += (dictionary.get(int(string[-2] + '0'), "Nothing"))
-            roman += (dictionary.get(int(string[-1]), "Nothing"))
-            return roman
-        elif string[-1] != '0' and string[-2] == '0' and string[-3] != '0':
-            roman = (dictionary.get(int(string[-4] + '000'), "Nothing"))
-            roman += (dictionary.get(int(string[-3] + '00'), "Nothing"))
-            roman += (dictionary.get(int(string[-1]), "Nothing"))
-            return roman
-        elif string[-1] != '0' and string[-2] == '0' and string[-3] == '0':
-            roman = (dictionary.get(int(string[-4] + '000'), "Nothing"))
-            roman += (dictionary.get(int(string[-1]), "Nothing"))
-            return roman
-        elif string[-1] != '0' and string[-2] != '0' and string[-3] == '0':
-            roman = (dictionary.get(int(string[-4] + '000'), "Nothing"))
-            roman += (dictionary.get(int(string[-2] + '0'), "Nothing"))
-            roman += (dictionary.get(int(string[-1]), "Nothing"))
-            return roman
-        elif string[-1] == '0' and string[-2] != '0' and string[-3] == '0':
-            roman = (dictionary.get(int(string[-4] + '000'), "Nothing"))
-            roman += (dictionary.get(int(string[-2] + '0'), "Nothing"))
-            return roman
+            interim.append(dictionary.get(int(string[i-correction] + zero), "NULL"))
+            roman = "".join(interim[::-1])
+            zero = zero + '0'
+    return roman
+
 print(checkio(9))
 print(checkio(13))
 print(checkio(201))
