@@ -7,7 +7,7 @@ Output: A verdict on the correctness of the expression in boolean (True or False
 def checkio(expression):
     stack = []
     try:
-        for i, char in enumerate(expression):
+        for char in expression:
             if char == '(':
                 stack.append(char)
             if char == '{':

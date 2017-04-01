@@ -24,12 +24,12 @@ def checkio(digit):
     correction = len(string) + 1
     for i in range(len(string), 0, -1):
         if string[i-correction] == '0':
-            zero = zero + '0'
+            zero += '0'
             continue
         else:
             interim.append(dictionary.get(int(string[i-correction] + zero), "NULL"))
             roman = "".join(interim[::-1])
-            zero = zero + '0'
+            zero += '0'
     return roman
 
 print(checkio(9))
